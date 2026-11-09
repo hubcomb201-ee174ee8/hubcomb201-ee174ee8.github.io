@@ -1,0 +1,2158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>秘密研究所好好学习天天向上 - 学习方向与课题聚合</title>
+  <meta name="description" content="秘密研究所好好学习天天向上汇聚神秘学、密码学与冷门知识等具体研究课题，提供精选条目、深度解析与FAQ问答，适合好奇心强的探索者阅读。">
+  <meta name="keywords" content="神秘学课题,密码学档案,冷门知识库,秘密研究动态,学习路径指南">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%231a1e2c'/%3E%3Cpath d='M32 12 L36 24 L48 24 L38 32 L42 44 L32 36 L22 44 L26 32 L16 24 L28 24 Z' fill='%23e6b450'/%3E%3C/svg%3E">
+  <style>
+    /* ---------- 全局变量与重置 ---------- */
+    :root {
+      --bg-page: #0f1117;
+      --bg-panel: #1a1e2c;
+      --bg-card: #222738;
+      --bg-soft: #2a3042;
+      --border-subtle: #2f3547;
+      --border-strong: #3e4560;
+      --text-primary: #e8eaf0;
+      --text-secondary: #a8b0c4;
+      --text-muted: #6e7a92;
+      --accent-gold: #e6b450;
+      --accent-gold-soft: #f2d48c;
+      --accent-teal: #3ec9b0;
+      --accent-rose: #d96c7b;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-card: 0 4px 16px rgba(0,0,0,0.35);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --max-width: 1360px;
+      --header-height: 64px;
+      --announce-height: 40px;
+      --sticky-offset: calc(var(--header-height) + var(--announce-height));
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-gold-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: var(--accent-gold);
+      text-decoration: underline;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+      background-color: var(--bg-soft);
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    /* ---------- 吸顶公告条 ---------- */
+    .announce-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #131a2b;
+      border-bottom: 1px solid var(--border-subtle);
+      height: var(--announce-height);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      font-size: 13px;
+      color: var(--accent-gold-soft);
+      gap: 8px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+    .announce-bar .badge {
+      background: var(--accent-gold);
+      color: #0f1117;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+    .announce-bar strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* ---------- 吸顶页头 ---------- */
+    .site-header {
+      position: sticky;
+      top: var(--announce-height);
+      z-index: 99;
+      background-color: rgba(15, 17, 23, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      height: var(--header-height);
+    }
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .brand:hover {
+      text-decoration: none;
+    }
+    .brand-svg {
+      width: 32px;
+      height: 32px;
+    }
+    .brand-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .brand-text .highlight {
+      color: var(--accent-gold);
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      flex: 1;
+      scrollbar-width: none;
+    }
+    .main-nav::-webkit-scrollbar {
+      display: none;
+    }
+    .main-nav a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--bg-soft);
+      color: var(--accent-gold-soft);
+      text-decoration: none;
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .search-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-soft);
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      transition: border-color 0.2s;
+    }
+    .search-toggle:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+    .search-toggle:hover {
+      border-color: var(--accent-gold);
+    }
+    .search-toggle svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* ---------- 搜索面板（隐藏/显示） ---------- */
+    .search-panel {
+      display: none;
+      position: sticky;
+      top: calc(var(--announce-height) + var(--header-height));
+      z-index: 98;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 16px;
+    }
+    .search-panel.active {
+      display: block;
+    }
+    .search-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .search-inner input {
+      flex: 1;
+      background: var(--bg-page);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-inner input:focus {
+      border-color: var(--accent-gold);
+    }
+    .search-inner button {
+      background: var(--accent-gold);
+      color: #0f1117;
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .search-inner button:hover {
+      background: var(--accent-gold-soft);
+    }
+    .search-inner button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    .search-feedback {
+      max-width: var(--max-width);
+      margin: 8px auto 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      min-height: 1.2em;
+    }
+
+    /* ---------- 主内容容器 ---------- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-content h1 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      word-break: break-word;
+    }
+    .hero-content .hero-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-gold);
+      color: #0f1117;
+      padding: 12px 28px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 15px;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: var(--accent-gold-soft);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .btn-primary:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-primary);
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid var(--border-strong);
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent-gold);
+      background: rgba(230, 180, 80, 0.08);
+      text-decoration: none;
+    }
+    .btn-outline:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-visual svg {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(230, 180, 80, 0.15));
+    }
+
+    /* ---------- 三栏门户布局 ---------- */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 28px;
+      padding: 32px 0;
+      align-items: start;
+    }
+
+    /* 左侧频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + 16px);
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px 0;
+      overflow-y: auto;
+      max-height: calc(100vh - var(--sticky-offset) - 32px);
+    }
+    .channel-sidebar h2 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      padding: 0 16px 12px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 8px;
+    }
+    .channel-list a {
+      display: block;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-left: 3px solid transparent;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .channel-list a:hover,
+    .channel-list a:focus-visible {
+      background: var(--bg-soft);
+      color: var(--accent-gold-soft);
+      border-left-color: var(--accent-gold);
+      text-decoration: none;
+      outline: none;
+    }
+    .channel-list a.active {
+      border-left-color: var(--accent-gold);
+      color: var(--accent-gold-soft);
+      background: rgba(230, 180, 80, 0.06);
+    }
+
+    /* 中间主内容区 */
+    .main-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* 右侧辅助栏 */
+    .sidebar-right {
+      position: sticky;
+      top: calc(var(--sticky-offset) + 16px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+    .side-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .side-card h3 svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--accent-gold);
+    }
+    .side-list li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      line-height: 1.5;
+    }
+    .side-list li:last-child {
+      border-bottom: none;
+    }
+    .side-list .rank-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-gold);
+      font-weight: 700;
+      flex-shrink: 0;
+      width: 18px;
+    }
+    .side-list a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .side-list a:hover {
+      color: var(--accent-gold-soft);
+      text-decoration: underline;
+    }
+    .side-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ---------- 通用板块样式 ---------- */
+    .section {
+      scroll-margin-top: var(--sticky-offset);
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+      position: relative;
+      padding-left: 14px;
+    }
+    .section-header h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 4px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+    .section-header .section-more {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .section-header .section-more:hover {
+      color: var(--accent-gold-soft);
+    }
+
+    .intro-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .intro-text strong {
+      color: var(--accent-gold-soft);
+      font-weight: 600;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-card);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--bg-soft);
+      color: var(--text-secondary);
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+    .tag.gold {
+      background: rgba(230, 180, 80, 0.15);
+      color: var(--accent-gold-soft);
+    }
+    .tag.teal {
+      background: rgba(62, 201, 176, 0.12);
+      color: var(--accent-teal);
+    }
+    .tag.rose {
+      background: rgba(217, 108, 123, 0.12);
+      color: var(--accent-rose);
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .card-title a:hover {
+      color: var(--accent-gold-soft);
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+    .card-meta .score {
+      color: var(--accent-gold);
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    /* 紧凑列表 */
+    .compact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .compact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.2s;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .compact-list li:last-child {
+      border-bottom: none;
+    }
+    .compact-list li:hover {
+      background: var(--bg-soft);
+    }
+    .compact-list .list-time {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-gold-soft);
+      flex-shrink: 0;
+      width: 80px;
+      padding-top: 2px;
+    }
+    .compact-list .list-title {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .compact-list .list-summary {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    /* 分类入口网格 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .category-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .category-item:hover {
+      border-color: var(--accent-gold);
+      background: var(--bg-soft);
+      text-decoration: none;
+    }
+    .category-item:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+    .category-item .cat-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-left: auto;
+    }
+    .category-item svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    /* 深度解析正文 */
+    .deep-dive {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .deep-dive h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      padding-left: 14px;
+      position: relative;
+    }
+    .deep-dive h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 4px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+    .deep-dive h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold-soft);
+      margin: 24px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .deep-dive p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .deep-dive ul,
+    .deep-dive ol {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .deep-dive li {
+      margin-bottom: 6px;
+    }
+    .deep-dive strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .deep-dive .highlight-box {
+      background: var(--bg-soft);
+      border-left: 3px solid var(--accent-gold);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 18px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* FAQ 折叠 */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .faq-item {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item[open] {
+      border-color: var(--accent-gold);
+    }
+    .faq-item summary {
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 0.2s;
+    }
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 20px;
+      color: var(--accent-gold);
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+    .faq-item summary:hover {
+      background: var(--bg-soft);
+    }
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: -2px;
+    }
+    .faq-item .faq-answer {
+      padding: 0 20px 18px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* 评论列表 */
+    .comment-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .comment-item {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .comment-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-gold-soft);
+      flex-shrink: 0;
+    }
+    .comment-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .comment-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .comment-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 资讯列表 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .news-item {
+      display: flex;
+      gap: 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      transition: border-color 0.2s;
+      align-items: flex-start;
+    }
+    .news-item:hover {
+      border-color: var(--border-strong);
+    }
+    .news-thumb {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+    .news-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .news-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .news-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .news-title a:hover {
+      color: var(--accent-gold-soft);
+    }
+    .news-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: flex;
+      gap: 12px;
+    }
+    .news-summary {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 标签索引 */
+    .tag-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag-index a {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 30px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .tag-index a:hover {
+      border-color: var(--accent-gold);
+      background: var(--bg-soft);
+      color: var(--accent-gold-soft);
+      text-decoration: none;
+    }
+    .tag-index a:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
+
+    /* 时间线 */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: var(--border-strong);
+      border-radius: 1px;
+    }
+    .timeline-item {
+      position: relative;
+      padding-left: 8px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -21px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      border: 2px solid var(--bg-page);
+      box-shadow: 0 0 0 2px var(--accent-gold);
+    }
+    .timeline-date {
+      font-size: 12px;
+      color: var(--accent-gold-soft);
+      font-family: var(--font-mono);
+      margin-bottom: 2px;
+    }
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      line-height: 1.6;
+    }
+
+    /* ---------- 页尾 ---------- */
+    .site-footer {
+      background: #0a0c12;
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0 24px;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-brand .brand-text {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 300px;
+    }
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .footer-col a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-col a:hover {
+      color: var(--accent-gold-soft);
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-bottom .example-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1024px) {
+      .portal-grid {
+        grid-template-columns: 160px 1fr;
+      }
+      .sidebar-right {
+        display: none;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .hero-visual svg {
+        max-width: 280px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 740px) {
+      :root {
+        --header-height: 56px;
+        --announce-height: 36px;
+      }
+      .portal-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .channel-sidebar {
+        position: static;
+        max-height: none;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 12px;
+        gap: 4px;
+        border-radius: var(--radius-md);
+      }
+      .channel-sidebar h2 {
+        display: none;
+      }
+      .channel-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        width: 100%;
+      }
+      .channel-list a {
+        padding: 6px 12px;
+        border-left: none;
+        border-radius: 20px;
+        background: var(--bg-soft);
+        font-size: 12px;
+        border: 1px solid transparent;
+      }
+      .channel-list a:hover {
+        border-left: none;
+        border-color: var(--accent-gold);
+      }
+      .channel-list a.active {
+        border-left: none;
+        border: 1px solid var(--accent-gold);
+      }
+      .hero-content h1 {
+        font-size: 26px;
+      }
+      .hero-content .hero-desc {
+        font-size: 14px;
+      }
+      .section-header h2 {
+        font-size: 19px;
+      }
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+      }
+      .card-title {
+        font-size: 14px;
+      }
+      .card-desc {
+        font-size: 12px;
+      }
+      .deep-dive {
+        padding: 18px;
+      }
+      .deep-dive h2 {
+        font-size: 20px;
+      }
+      .deep-dive h3 {
+        font-size: 16px;
+      }
+      .comment-list {
+        grid-template-columns: 1fr;
+      }
+      .news-item {
+        flex-direction: column;
+      }
+      .news-thumb {
+        width: 100%;
+        height: 160px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-toggle span {
+        display: none;
+      }
+      .brand-text {
+        font-size: 14px;
+      }
+      .main-nav a {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .container {
+        padding: 0 10px;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 -->
+<div class="announce-bar" role="status" aria-live="polite">
+  <span class="badge">更新</span>
+  <strong>本周新增 12 条档案</strong> · 密码学专题「维吉尼亚密码变体」已上线 · 11 月 8 日 09:30 更新
+</div>
+
+<!-- 吸顶页头 -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/#hero" class="brand" aria-label="秘密研究所好好学习天天向上 首页">
+      <svg class="brand-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="32" r="28" fill="#1a1e2c" stroke="#e6b450" stroke-width="2"/>
+        <path d="M32 12 L36 24 L48 24 L38 32 L42 44 L32 36 L22 44 L26 32 L16 24 L28 24 Z" fill="#e6b450"/>
+        <circle cx="32" cy="32" r="4" fill="#0f1117"/>
+      </svg>
+      <span class="brand-text">秘密研究所<span class="highlight">好好学习天天向上</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="主题导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#featured">精选课题</a>
+      <a href="/#updates">最新动态</a>
+      <a href="/#categories">分类入口</a>
+      <a href="/#deep-dive">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#comments">用户评论</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#recommend">相关推荐</a>
+      <a href="/#timeline">研究时间线</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="search-toggle" id="searchToggle" aria-expanded="false" aria-controls="searchPanel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <span>搜索</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 搜索面板 -->
+<div class="search-panel" id="searchPanel">
+  <div class="search-inner">
+    <input type="search" id="searchInput" placeholder="搜索课题名称、类型或关键词…" aria-label="搜索页面内容">
+    <button id="searchBtn">查找</button>
+  </div>
+  <div class="search-feedback" id="searchFeedback"></div>
+</div>
+
+<!-- 主内容 -->
+<main>
+  <!-- 首屏 -->
+  <section class="hero container" id="hero">
+    <div class="hero-content">
+      <h1>秘密研究所好好学习天天向上</h1>
+      <p class="hero-desc">汇聚神秘学、密码学、冷门科学史与逻辑谜题等具体研究课题，提供条目化档案、类型对比与消费路径参考，适合好奇心强的探索者系统阅读。</p>
+      <div class="hero-actions">
+        <a href="/#featured" class="btn-primary">
+          浏览精选课题
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/#overview" class="btn-outline">了解领域方向</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e6b450" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#e6b450" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e6b450"/>
+            <stop offset="100%" stop-color="#3ec9b0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="200" cy="150" r="130" fill="url(#glow)"/>
+        <circle cx="200" cy="150" r="100" fill="none" stroke="#2f3547" stroke-width="1.5"/>
+        <circle cx="200" cy="150" r="70" fill="none" stroke="#3e4560" stroke-width="1" stroke-dasharray="4 6"/>
+        <circle cx="200" cy="150" r="40" fill="none" stroke="url(#ring)" stroke-width="2"/>
+        <path d="M200 50 L210 90 L250 100 L220 130 L230 170 L200 150 L170 170 L180 130 L150 100 L190 90 Z" fill="#e6b450" opacity="0.9"/>
+        <circle cx="200" cy="150" r="12" fill="#0f1117" stroke="#e6b450" stroke-width="2"/>
+        <circle cx="200" cy="150" r="5" fill="#3ec9b0"/>
+        <circle cx="200" cy="50" r="4" fill="#e6b450"/>
+        <circle cx="300" cy="150" r="4" fill="#3ec9b0"/>
+        <circle cx="200" cy="250" r="4" fill="#d96c7b"/>
+        <circle cx="100" cy="150" r="4" fill="#e6b450"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 三栏门户布局 -->
+  <div class="container portal-grid">
+    <!-- 左侧频道索引 -->
+    <aside class="channel-sidebar" aria-label="频道索引">
+      <h2>频道索引</h2>
+      <nav class="channel-list">
+        <a href="/#overview">神秘学档案</a>
+        <a href="/#featured" class="active">密码学课题</a>
+        <a href="/#updates">冷门科学史</a>
+        <a href="/#categories">逻辑谜题</a>
+        <a href="/#deep-dive">符号与象征</a>
+        <a href="/#guide">实验方法库</a>
+        <a href="/#faq">未解之谜</a>
+        <a href="/#comments">研究工具志</a>
+        <a href="/#news">田野调查笔记</a>
+        <a href="/#recommend">思维模型</a>
+      </nav>
+    </aside>
+
+    <!-- 中间主内容区 -->
+    <div class="main-content">
+
+      <!-- 板块 1：主题领域概览 -->
+      <section class="section" id="overview">
+        <div class="section-header">
+          <h2>主题领域概览</h2>
+        </div>
+        <div class="intro-text">
+          <p><strong>秘密研究所好好学习天天向上</strong> 覆盖的方向既包含有明确文献记载的密码学与密码破译史，也包含神秘学象征系统、冷门科学实验记录和逻辑谜题设计。在密码学方向，从古典的凯撒移位、维吉尼亚方阵到近代的恩尼格玛机改造方案，都有可追踪的档案条目；神秘学方向则侧重符号谱系、炼金术文本中的操作序列以及民俗仪式中的信息编码。冷门科学史收录了被主流叙事忽略的重复实验与失败记录，逻辑谜题部分关注可验证的推理结构和难度分层。</p>
+          <p>当前值得关注的具体内容包括：11 月更新的「维吉尼亚密码变体」交互推演、10 月底解封的「费斯托斯圆盘符号对照表」第二轮校注、以及持续连载的「贝尔实验室未公开备忘录」第 9 辑。每个条目都标注了原始来源类型、可信度层级和阅读前置建议，方便按兴趣深度选择切入。</p>
+        </div>
+      </section>
+
+      <!-- 板块 2：精选内容推荐 -->
+      <section class="section" id="featured">
+        <div class="section-header">
+          <h2>精选课题推荐</h2>
+          <a href="/#recommend" class="section-more">延伸方向 →</a>
+        </div>
+        <div class="card-grid">
+          <!-- 卡片 1 -->
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/vigenere-cipher42/400/300" alt="维吉尼亚密码变体手稿封面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag gold">密码学</span>
+                <span class="tag teal">古典密码</span>
+                <span class="tag">推演工具</span>
+              </div>
+              <h3 class="card-title"><a href="/#deep-dive">维吉尼亚密码变体：周期密钥的破译路径</a></h3>
+              <p class="card-desc">在标准方阵基础上引入变周期密钥与噪声填充，本条目提供 12 组已知明文对与逐步破译记录，适合练习卡西斯基检验的变体应用。</p>
+              <div class="card-meta">
+                <span class="score">9.2 分</span>
+                <span>更新于 11 月 7 日</span>
+              </div>
+            </div>
+          </article>
+          <!-- 卡片 2 -->
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/phaistos-disc08/400/300" alt="费斯托斯圆盘符号拓片" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag gold">符号学</span>
+                <span class="tag rose">未解之谜</span>
+                <span class="tag">校注</span>
+              </div>
+              <h3 class="card-title"><a href="/#deep-dive">费斯托斯圆盘符号对照表第二轮校注</a></h3>
+              <p class="card-desc">基于 2025 年新公开的伊拉克利翁博物馆高清扫描件，对 45 个符号的朝向与分组重新校对，补充了 7 处此前被忽略的边饰标记。</p>
+              <div class="card-meta">
+                <span class="score">8.8 分</span>
+                <span>更新于 10 月 30 日</span>
+              </div>
+            </div>
+          </article>
+          <!-- 卡片 3 -->
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/bell-labs09/400/300" alt="贝尔实验室备忘录档案盒" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag teal">科学史</span>
+                <span class="tag">档案解封</span>
+                <span class="tag gold">连载</span>
+              </div>
+              <h3 class="card-title"><a href="/#updates">贝尔实验室未公开备忘录·第 9 辑</a></h3>
+              <p class="card-desc">本辑聚焦 1953 年信息论早期草稿中的边注，涉及香农对冗余度实验的两次未发表修正，附有手稿影印注释与差异对照表。</p>
+              <div class="card-meta">
+                <span class="score">9.5 分</span>
+                <span>更新于 11 月 5 日</span>
+              </div>
+            </div>
+          </article>
+          <!-- 卡片 4 -->
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/enigma-mod23/400/300" alt="恩尼格玛机改造方案结构图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag gold">密码学</span>
+                <span class="tag">机械加密</span>
+                <span class="tag teal">硬件考据</span>
+              </div>
+              <h3 class="card-title"><a href="/#deep-dive">恩尼格玛机改造方案与接线板漏洞</a></h3>
+              <p class="card-desc">梳理 1942 年海军版四转子改造的三种民间复刻方案，重点分析接线板交换对密钥空间的实际削弱幅度，附密钥空间计算表。</p>
+              <div class="card-meta">
+                <span class="score">9.0 分</span>
+                <span>更新于 11 月 2 日</span>
+              </div>
+            </div>
+          </article>
+          <!-- 卡片 5 -->
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/alchemy-code17/400/300" alt="炼金术文本操作序列插图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag rose">神秘学</span>
+                <span class="tag">文本编码</span>
+                <span class="tag gold">符号谱系</span>
+              </div>
+              <h3 class="card-title"><a href="/#deep-dive">炼金术文本中的操作序列编码</a></h3>
+              <p class="card-desc">以《翠玉录》12 世纪拉丁译本为样本，拆解「溶解—凝固」段落中的数字隐喻与步骤编码，提供符号对照卡与操作流程图。</p>
+              <div class="card-meta">
+                <span class="score">8.6 分</span>
+                <span>更新于 10 月 28 日</span>
+              </div>
+            </div>
+          </article>
+          <!-- 卡片 6 -->
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/logic-puzzle55/400/300" alt="逻辑谜题难度分层图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag teal">逻辑谜题</span>
+                <span class="tag">难度分层</span>
+                <span class="tag">可验证</span>
+              </div>
+              <h3 class="card-title"><a href="/#guide">逻辑谜题 L3 难度：排除法与非单调推理</a></h3>
+              <p class="card-desc">收录 8 道经过验证的 L3 级谜题，覆盖骑士与无赖变体、时间表约束和知识推理，每题附唯一解证明路径与常见错误分支。</p>
+              <div class="card-meta">
+                <span class="score">8.9 分</span>
+                <span>更新于 11 月 6 日</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 板块 3：最新更新 / 动态 -->
+      <section class="section" id="updates">
+        <div class="section-header">
+          <h2>最新更新与动态</h2>
+        </div>
+        <ul class="compact-list">
+          <li>
+            <span class="list-time">今天 09:30</span>
+            <div>
+              <span class="list-title">维吉尼亚密码变体推演工具</span>
+              <span class="list-summary">— 新增 12 组噪声填充样本，支持自定义周期密钥长度。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">今天 08:15</span>
+            <div>
+              <span class="list-title">费斯托斯圆盘符号对照表</span>
+              <span class="list-summary">— 第二轮校注完成，补充 7 处边饰标记的朝向修正。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">昨天 21:10</span>
+            <div>
+              <span class="list-title">贝尔实验室备忘录·第 9 辑</span>
+              <span class="list-summary">— 香农 1953 年冗余度实验边注上线，含手稿影印注释。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">11 月 7 日</span>
+            <div>
+              <span class="list-title">恩尼格玛机改造方案</span>
+              <span class="list-summary">— 新增海军版四转子民间复刻的密钥空间对比表。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">11 月 6 日</span>
+            <div>
+              <span class="list-title">逻辑谜题 L3 难度专题</span>
+              <span class="list-summary">— 上线 8 道谜题及唯一解证明路径，附错误分支标注。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">11 月 5 日</span>
+            <div>
+              <span class="list-title">炼金术操作序列编码</span>
+              <span class="list-summary">— 《翠玉录》拉丁译本符号对照卡更新至 24 个条目。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">11 月 3 日</span>
+            <div>
+              <span class="list-title">田野调查笔记·第 4 期</span>
+              <span class="list-summary">— 闽南地区民间占卜符号的口述记录与转写规则上线。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">11 月 1 日</span>
+            <div>
+              <span class="list-title">不可靠实验记录清单</span>
+              <span class="list-summary">— 新增 6 条 19 世纪重复实验结果与原始手稿比对。</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 板块 4：分类入口 -->
+      <section class="section" id="categories">
+        <div class="section-header">
+          <h2>分类入口</h2>
+        </div>
+        <div class="category-grid">
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            密码学 <span class="cat-count">28 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8 5.6 21.2 8 14 2 9.2h7.6z"/></svg>
+            神秘学 <span class="cat-count">19 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H8v-2h4v2zm4-4H8v-2h8v2zm0-4H8V7h8v2z"/></svg>
+            冷门科学史 <span class="cat-count">15 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            逻辑谜题 <span class="cat-count">22 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            符号与象征 <span class="cat-count">11 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4z"/></svg>
+            实验方法库 <span class="cat-count">9 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            未解之谜 <span class="cat-count">14 条</span>
+          </a>
+          <a href="/#featured" class="category-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+            研究工具志 <span class="cat-count">7 条</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 板块 5：深度解析正文 -->
+      <section class="section" id="deep-dive">
+        <div class="deep-dive">
+          <h2>深度解析：秘密研究所好好学习天天向上的内容分层与阅读策略</h2>
+          <p>在 <strong>秘密研究所好好学习天天向上</strong> 收录的课题中，最容易被低估的是“可信度分层”本身。同样是密码学条目，基于原始手稿和同期设备考据的内容与基于二手转述的整理，在细节密度和可验证性上差异很大。以下从几个具体维度展开，帮助判断一个条目是否值得投入时间。</p>
+
+          <h3>一、密码学课题：从经典到机械加密的阅读顺序</h3>
+          <p>古典密码条目适合作为入口，因为它们的加密规则完全公开，破译路径可以被独立验证。凯撒移位与仿射密码的变体数量有限，通常 1—2 小时可以完成从规则理解到手工破译的完整循环。维吉尼亚密码则引入了周期密钥的概念，是理解“频率分析失效”的关键节点。本站的「维吉尼亚密码变体」条目在标准方阵之外增加了噪声填充，使卡西斯基检验的周期判定需要先做偏移校正，适合已经熟悉基础版本的学习者。</p>
+          <p>机械加密阶段以恩尼格玛机为代表。阅读时建议先看接线板与转子的组合空间计算，再看实际破译中的 crib 选择策略。恩尼格玛改造方案条目里附有密钥空间对比表，把海军版四转子改造前后的理论密钥量并列，能直观看出“增加一个转子”与“增加接线板交换”对安全性的不同影响量级。</p>
+
+          <h3>二、神秘学与符号系统：区分谱系描述与操作编码</h3>
+          <p>神秘学方向的条目大致分为两类：一类是符号谱系梳理，说明某个符号在哪些文本中出现、形态如何演变；另一类是操作编码解读，分析文本中步骤序列是否隐含数字或字母映射。前者偏历史考据，后者更接近密码分析。费斯托斯圆盘符号对照表属于前者，它的价值在于提供可复用的符号朝向与分组规则；炼金术操作序列编码属于后者，需要读者先接受“步骤顺序本身可能是信息载体”这一前提。</p>
+          <ul>
+            <li><strong>谱系类条目</strong>：关注来源年代、出土地点、收藏编号和同期对比样本，适合按时间线顺序阅读。</li>
+            <li><strong>操作编码类条目</strong>：关注步骤数量、重复模式、数字与元素的对应关系，适合与密码学古典条目交叉阅读。</li>
+          </ul>
+
+          <h3>三、冷门科学史：失败记录为什么值得读</h3>
+          <p>贝尔实验室未公开备忘录系列展示的是一种特殊的阅读价值：失败实验和未发表修正往往比成功论文包含更多方法细节。第 9 辑中香农对冗余度实验的两次修正，记录了实验条件变化如何影响结论稳定性。这类条目不需要读者具备信息论专业背景，但需要留意“实验条件—观测结果—修正原因”三段结构。对比同期发表的正式论文，可以观察哪些分歧被保留、哪些被省略。</p>
+          <div class="highlight-box">
+            判断一个冷门科学史条目是否可靠，可以检查三个要素：原始手稿或档案编号是否明确、实验条件是否可复现、修正理由是否指向具体变量。三者齐全的条目通常细节密度更高。
+          </div>
+
+          <h3>四、逻辑谜题的难度分层与验证标准</h3>
+          <p>逻辑谜题条目的核心不是题面故事，而是解的唯一性与证明路径。L1 级通常只需单次排除，L2 级需要多步约束传播，L3 级则涉及非单调推理或知识推理——即解题者需要推理“其他解题者知道什么”。本站的 L3 专题为每道题标注了唯一解证明路径和常见错误分支，错误分支的价值在于展示直觉在哪些节点会失效。比较不同题目的分支数量，可以粗略判断难度是否与标注一致。</p>
+          <p>阅读顺序上，建议先完成 2—3 道 L2 题建立约束传播的手感，再进入 L3。若直接跳到非单调推理，容易把题面中的“不知道”误读为信息缺失，而非推理条件。</p>
+
+          <h3>五、跨方向比较：什么情况下值得深入一个条目</h3>
+          <p>不同方向的条目在“可验证性”和“前置知识要求”两个维度上分布不同。密码学古典条目可验证性高、前置要求低；机械加密条目可验证性中等、前置要求中等；神秘学操作编码类条目可验证性偏低、前置要求视具体文本而定；逻辑谜题可验证性最高，因为解的唯一性可以被形式化检查。冷门科学史的可验证性取决于档案公开程度，通常需要对照原始来源。</p>
+          <p>当一个条目同时满足“有明确来源编号”“提供可操作步骤或对照表”“标注了已知局限”时，深入阅读的回报通常较高。反之，如果条目通篇只有转述和结论、没有中间推演过程，更适合作为线索而非终点。</p>
+        </div>
+      </section>
+
+      <!-- 板块 6：体验指南 / 消费路径 -->
+      <section class="section" id="guide">
+        <div class="section-header">
+          <h2>体验指南：内容消费路径</h2>
+        </div>
+        <div class="intro-text">
+          <p>面对 <strong>秘密研究所好好学习天天向上</strong> 中并列的多个方向，比较高效的进入顺序是先窄后宽：从一个规则明确、反馈周期短的条目开始，建立判断标准后再扩展到来源更复杂的方向。</p>
+        </div>
+        <div class="compact-list">
+          <li>
+            <span class="list-time">第一步</span>
+            <div>
+              <span class="list-title">古典密码基础循环</span>
+              <span class="list-summary">— 选凯撒或仿射密码变体，完成规则理解、手工加密、频率分析破译三步。目标：建立“规则可验证”的阅读预期。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">第二步</span>
+            <div>
+              <span class="list-title">逻辑谜题 L2 约束传播</span>
+              <span class="list-summary">— 做 2—3 道 L2 题，重点记录排除顺序而非答案。目标：熟悉多步约束的推演节奏。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">第三步</span>
+            <div>
+              <span class="list-title">机械加密密钥空间对比</span>
+              <span class="list-summary">— 阅读恩尼格玛改造方案中的密钥空间表，比较不同改造措施的边际效果。目标：理解组合空间与破译成本的关系。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">第四步</span>
+            <div>
+              <span class="list-title">符号谱系与操作编码交叉</span>
+              <span class="list-summary">— 同时打开费斯托斯圆盘对照表和炼金术操作编码，比较两类符号系统的记录方式差异。目标：区分描述性符号与指令性符号。</span>
+            </div>
+          </li>
+          <li>
+            <span class="list-time">第五步</span>
+            <div>
+              <span class="list-title">冷门科学史档案精读</span>
+              <span class="list-summary">— 选贝尔实验室备忘录中的单次修正记录，检查实验条件、观测结果、修正原因三段是否完整。目标：掌握档案类条目的可信度判断。</span>
+            </div>
+          </li>
+        </div>
+      </section>
+
+      <!-- 板块 7：FAQ -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <h2>FAQ 常见问题</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>维吉尼亚密码变体和标准维吉尼亚密码有什么区别？</summary>
+            <div class="faq-answer">
+              标准维吉尼亚密码使用固定周期密钥，卡西斯基检验可以通过重复间隔推断密钥长度。变体在密钥序列中插入噪声填充或改变周期长度，使重复间隔不再稳定，破译时需要先做偏移校正再判定周期。本站条目提供了 12 组带噪声的样本用于对比。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>第一次接触密码学课题，从哪个条目开始看比较好？</summary>
+            <div class="faq-answer">
+              建议从凯撒移位或仿射密码的变体条目开始。它们的规则完全公开，加密和解密都可以手工完成，不需要前置数学知识。完成一次“加密—频率分析—破译”的完整循环后，再进入维吉尼亚密码会更容易理解周期密钥带来的变化。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>费斯托斯圆盘符号对照表的第二轮校注改了什么？</summary>
+            <div class="faq-answer">
+              第二轮校注基于 2025 年公开的高清扫描件，修正了 7 处符号朝向的判定，并补充了此前被忽略的边饰标记分组。对于研究符号序列的研究者，朝向修正会影响符号是否被视为独立单元的判断。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>贝尔实验室未公开备忘录系列适合没有信息论背景的人读吗？</summary>
+            <div class="faq-answer">
+              适合，但需要调整阅读重点。不必先掌握信息论公式，可以关注“实验条件—观测结果—修正原因”三段结构，观察哪些变量变化导致了结论调整。系列条目对专业术语有简要注释，重点在于方法过程而非数学推导。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>逻辑谜题的 L1、L2、L3 难度分级标准是什么？</summary>
+            <div class="faq-answer">
+              L1 级通常只需单次排除或直接匹配；L2 级需要多步约束传播，解题路径存在分叉但可回溯；L3 级涉及非单调推理或知识推理，即需要推理“其他解题者知道什么”或“信息缺失本身构成条件”。分级主要依据证明路径长度和错误分支数量。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>炼金术文本的操作序列编码和普通历史解读有什么不同？</summary>
+            <div class="faq-answer">
+              普通历史解读关注文本的年代、作者和思想背景；操作序列编码关注步骤顺序本身是否携带信息，例如步骤数量与元素的数字对应、重复模式与字母映射。后者需要把文本当作可能的编码载体，而不仅是记录。两类解读可以互补，但判断标准不同。
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 板块 8：用户评论 -->
+      <section class="section" id="comments">
+        <div class="section-header">
+          <h2>用户评论</h2>
+        </div>
+        <div class="comment-list">
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">林</span>
+              <span class="comment-name">林间观察者</span>
+              <span class="comment-date">11 月 8 日</span>
+            </div>
+            <p class="comment-text">维吉尼亚变体那个噪声填充设计得很妙，我卡在周期判定上大概半小时，后来用偏移校正才过。比标准版有意思。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">陈</span>
+              <span class="comment-name">陈默读档案</span>
+              <span class="comment-date">11 月 7 日</span>
+            </div>
+            <p class="comment-text">贝尔实验室第 9 辑的边注影印很清晰，不过有些英文手写体辨认需要耐心。香农那个修正记录比正式论文有意思多了。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">王</span>
+              <span class="comment-name">王算盘</span>
+              <span class="comment-date">11 月 7 日</span>
+            </div>
+            <p class="comment-text">L3 逻辑谜题的错误分支标注对我帮助很大，之前自己推的时候老在非单调那一步想当然。希望多出几道知识推理的。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">赵</span>
+              <span class="comment-name">赵符号</span>
+              <span class="comment-date">11 月 6 日</span>
+            </div>
+            <p class="comment-text">费斯托斯圆盘第二轮校注把边饰标记补上了，之前对照表确实漏了。不过符号分组还是有争议，希望能看到更多原始拓片对比。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">周</span>
+              <span class="comment-name">周推演</span>
+              <span class="comment-date">11 月 5 日</span>
+            </div>
+            <p class="comment-text">恩尼格玛改造方案的密钥空间对比表很直观，海军版四转子那个改造幅度比我预想的小，接线板交换的削弱效果倒是很明显。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">吴</span>
+              <span class="comment-name">吴炼金</span>
+              <span class="comment-date">11 月 4 日</span>
+            </div>
+            <p class="comment-text">炼金术操作编码那篇角度挺新，但我觉得有些数字对应可能过度解读了。不过作为假设提出来还是值得讨论的。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">郑</span>
+              <span class="comment-name">郑笔记</span>
+              <span class="comment-date">11 月 3 日</span>
+            </div>
+            <p class="comment-text">体验指南的路径挺合理，我就是按古典密码→逻辑谜题→机械加密这个顺序看的，确实比直接啃恩尼格玛轻松。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">孙</span>
+              <span class="comment-name">孙冷门</span>
+              <span class="comment-date">11 月 2 日</span>
+            </div>
+            <p class="comment-text">不可靠实验记录清单里那 6 条 19 世纪的重复实验，有几条的手稿比对很细，但部分结论还是样本太少。当线索看没问题。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">李</span>
+              <span class="comment-name">李谜题</span>
+              <span class="comment-date">11 月 1 日</span>
+            </div>
+            <p class="comment-text">L2 到 L3 的跨度确实大，建议在体验指南里再加一个 L2.5 的过渡题组。现在直接跳 L3 有点吃力。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">黄</span>
+              <span class="comment-name">黄田野</span>
+              <span class="comment-date">10 月 31 日</span>
+            </div>
+            <p class="comment-text">田野调查笔记第 4 期的闽南占卜符号转写规则挺有意思，口述记录部分保留了方言原词，这个处理方式好。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">刘</span>
+              <span class="comment-name">刘谱系</span>
+              <span class="comment-date">10 月 30 日</span>
+            </div>
+            <p class="comment-text">符号谱系类条目如果能加一个时间轴视图会更好，现在跨文本对比需要来回翻。不过内容本身很扎实。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head">
+              <span class="comment-avatar">徐</span>
+              <span class="comment-name">徐工具</span>
+              <span class="comment-date">10 月 29 日</span>
+            </div>
+            <p class="comment-text">研究工具志里的频率分析小工具很实用，就是界面有点简陋。数据导出支持 CSV 这点好评。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块 9：相关资讯 -->
+      <section class="section" id="news">
+        <div class="section-header">
+          <h2>相关资讯</h2>
+        </div>
+        <div class="news-list">
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/news-phaistos11/600/400" alt="费斯托斯圆盘高清扫描发布会现场" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title"><a href="/#deep-dive">费斯托斯圆盘高清扫描件公开第二批，符号朝向校注迎来更新</a></h3>
+              <div class="news-meta">
+                <span>2026-11-07</span>
+                <span>来源：伊拉克利翁博物馆通讯</span>
+              </div>
+              <p class="news-summary">第二批 16 位分辨率扫描覆盖圆盘背面边饰区域，为符号分组提供新依据。本站对照表已同步启动第三轮校注。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/news-enigma14/600/400" alt="恩尼格玛机复刻模型接线板特写" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title"><a href="/#featured">恩尼格玛复刻社区发布四转子接线板兼容方案</a></h3>
+              <div class="news-meta">
+                <span>2026-11-05</span>
+                <span>来源：机械加密爱好者论坛</span>
+              </div>
+              <p class="news-summary">新方案允许在民用复刻机上模拟海军版四转子接线板交换逻辑，本站密钥空间对比表已补充该方案的实测数据。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/news-bell17/600/400" alt="贝尔实验室档案室手稿架" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title"><a href="/#updates">贝尔实验室档案室完成 1950—1955 年备忘录数字化</a></h3>
+              <div class="news-meta">
+                <span>2026-11-03</span>
+                <span>来源：信息史研究通讯</span>
+              </div>
+              <p class="news-summary">数字化范围涵盖香农冗余度实验相关边注与通信，第 10 辑备忘录已在整理中，预计 11 月中旬上线。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/news-logic09/600/400" alt="逻辑谜题社区线下解题活动现场" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title"><a href="/#guide">逻辑谜题社区发布 L3 难度校准白皮书</a></h3>
+              <div class="news-meta">
+                <span>2026-11-01</span>
+                <span>来源：谜题设计者协会</span>
+              </div>
+              <p class="news-summary">白皮书提出以证明路径长度和错误分支数量双指标替代单一定性分级，本站 L3 专题已标注对应指标。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/news-alchemy22/600/400" alt="中世纪炼金术手稿数字副本" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title"><a href="/#featured">《翠玉录》12 世纪拉丁译本数字副本开放高清下载</a></h3>
+              <div class="news-meta">
+                <span>2026-10-29</span>
+                <span>来源：欧洲手稿数字图书馆</span>
+              </div>
+              <p class="news-summary">高清副本包含此前模糊的页边注记，本站炼金术操作序列编码条目已引用该版本重新校对数字隐喻配图。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/news-field31/600/400" alt="闽南地区田野调查记录本与符号拓片" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title"><a href="/#updates">闽南民间占卜符号口述记录项目完成第二期采集</a></h3>
+              <div class="news-meta">
+                <span>2026-10-26</span>
+                <span>来源：民俗符号研究组</span>
+              </div>
+              <p class="news-summary">第二期新增 23 位口述者记录，覆盖 5 个乡镇的符号变体。本站田野调查笔记第 4 期已整合首批转写规则。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 板块 10：相关推荐 -->
+      <section class="section" id="recommend">
+        <div class="section-header">
+          <h2>相关推荐：延伸方向</h2>
+        </div>
+        <div class="tag-index">
+          <a href="/#featured">卡西斯基检验变体</a>
+          <a href="/#featured">恩尼格玛转子接线</a>
+          <a href="/#featured">线性 B 符号对照</a>
+          <a href="/#featured">炼金术数字隐喻</a>
+          <a href="/#featured">非单调推理题集</a>
+          <a href="/#featured">香农冗余度实验</a>
+          <a href="/#featured">闽南占卜符号转写</a>
+          <a href="/#featured">19 世纪重复实验清单</a>
+        </div>
+      </section>
+
+      <!-- 板块 11：补充板块 - 研究时间线 -->
+      <section class="section" id="timeline">
+        <div class="section-header">
+          <h2>研究时间线：近期关键节点</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2026-11-08</div>
+            <div class="timeline-title">维吉尼亚密码变体推演工具新增 12 组噪声样本</div>
+            <div class="timeline-desc">支持自定义周期密钥长度与填充模式，附偏移校正步骤说明。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026-11-05</div>
+            <div class="timeline-title">恩尼格玛复刻社区发布四转子接线板兼容方案</div>
+            <div class="timeline-desc">本站密钥空间对比表同步补充该方案的实测数据与理论值差异。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026-11-03</div>
+            <div class="timeline-title">贝尔实验室 1950—1955 备忘录完成数字化</div>
+            <div class="timeline-desc">第 10 辑整理中，预计 11 月中旬上线，聚焦冗余度实验后续通信。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026-10-30</div>
+            <div class="timeline-title">费斯托斯圆盘符号对照表第二轮校注完成</div>
+            <div class="timeline-desc">修正 7 处符号朝向，补充边饰标记分组，第三轮校注启动。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026-10-26</div>
+            <div class="timeline-title">闽南民间占卜符号口述记录第二期采集完成</div>
+            <div class="timeline-desc">新增 23 位口述者记录，覆盖 5 个乡镇的符号变体。</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="sidebar-right" aria-label="辅助信息">
+      <div class="side-card">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+          本周热榜
+        </h3>
+        <ul class="side-list">
+          <li><span class="rank-num">01</span><a href="/#featured">维吉尼亚密码变体推演</a><span class="side-meta">9.2</span></li>
+          <li><span class="rank-num">02</span><a href="/#featured">贝尔实验室备忘录第 9 辑</a><span class="side-meta">9.5</span></li>
+          <li><span class="rank-num">03</span><a href="/#featured">恩尼格玛机改造方案</a><span class="side-meta">9.0</span></li>
+          <li><span class="rank-num">04</span><a href="/#featured">逻辑谜题 L3 难度专题</a><span class="side-meta">8.9</span></li>
+          <li><span class="rank-num">05</span><a href="/#featured">费斯托斯圆盘符号对照表</a><span class="side-meta">8.8</span></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          最近更新
+        </h3>
+        <ul class="side-list">
+          <li><span class="side-meta">今天 09:30</span><a href="/#updates">维吉尼亚噪声样本 +12</a></li>
+          <li><span class="side-meta">今天 08:15</span><a href="/#updates">圆盘对照表第二轮校注</a></li>
+          <li><span class="side-meta">昨天 21:10</span><a href="/#updates">贝尔备忘录第 9 辑</a></li>
+          <li><span class="side-meta">11 月 7 日</span><a href="/#updates">恩尼格玛密钥空间表</a></li>
+          <li><span class="side-meta">11 月 6 日</span><a href="/#updates">L3 谜题专题上线</a></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          阅读提示
+        </h3>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;">密码学古典条目可手工验证；机械加密条目建议先看密钥空间表；神秘学操作编码需注意假设前提；逻辑谜题按 L1→L2→L3 顺序推进。</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-text">秘密研究所<span class="highlight">好好学习天天向上</span></div>
+        <p>聚合密码学、神秘学、冷门科学史与逻辑谜题的具体研究课题，提供条目化档案、类型对比与阅读路径参考。</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索方向</h4>
+        <ul>
+          <li><a href="/#overview">主题领域概览</a></li>
+          <li><a href="/#featured">精选课题推荐</a></li>
+          <li><a href="/#updates">最新更新动态</a></li>
+          <li><a href="/#categories">分类入口</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>深度内容</h4>
+        <ul>
+          <li><a href="/#deep-dive">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#faq">FAQ 常见问题</a></li>
+          <li><a href="/#timeline">研究时间线</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>社区与资讯</h4>
+        <ul>
+          <li><a href="/#comments">用户评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#recommend">相关推荐</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 秘密研究所好好学习天天向上 · 内容聚合示例页</span>
+      <span class="example-note">部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // 搜索面板切换
+    var searchToggle = document.getElementById('searchToggle');
+    var searchPanel = document.getElementById('searchPanel');
+    var searchInput = document.getElementById('searchInput');
+    var searchBtn = document.getElementById('searchBtn');
+    var searchFeedback = document.getElementById('searchFeedback');
+
+    if (searchToggle && searchPanel) {
+      searchToggle.addEventListener('click', function() {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+        searchPanel.classList.toggle('active');
+        if (!expanded) {
+          searchInput.focus();
+        }
+      });
+    }
+
+    // 简单页面内内容查找（高亮并滚动到第一个匹配的可见文字块）
+    function performSearch() {
+      var query = searchInput.value.trim();
+      if (!query) {
+        searchFeedback.textContent = '请输入要查找的关键词。';
+        return;
+      }
+      // 移除旧高亮
+      var oldMarks = document.querySelectorAll('mark.search-highlight');
+      oldMarks.forEach(function(mark) {
+        var parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize();
+      });
+
+      var main = document.querySelector('main');
+      if (!main) return;
+
+      // 遍历文本节点，找到第一个包含关键词的可见块
+      var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(node) {
+          if (node.parentElement && node.parentElement.closest('script, style, [aria-hidden="true"]')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          if (node.textContent.trim().length === 0) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      var firstMatchNode = null;
+      var node;
+      var regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+
+      while (node = walker.nextNode()) {
+        if (regex.test(node.textContent)) {
+          firstMatchNode = node;
+          break;
+        }
+      }
+
+      if (firstMatchNode) {
+        var parentEl = firstMatchNode.parentElement;
+        // 高亮所有匹配（简单处理：只高亮第一个节点的匹配文本，避免复杂DOM操作）
+        var text = firstMatchNode.textContent;
+        var replaced = text.replace(regex, function(match) {
+          return '<mark class="search-highlight" style="background:var(--accent-gold);color:#0f1117;padding:0 2px;border-radius:2px;">' + match + '</mark>';
+        });
+        var span = document.createElement('span');
+        span.innerHTML = replaced;
+        firstMatchNode.parentNode.replaceChild(span, firstMatchNode);
+
+        // 滚动到可见
+        parentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        searchFeedback.textContent = '已找到包含“' + query + '”的内容，已滚动至目标位置。';
+      } else {
+        searchFeedback.textContent = '未找到包含“' + query + '”的内容，请尝试其他关键词。';
+      }
+    }
+
+    if (searchBtn) {
+      searchBtn.addEventListener('click', performSearch);
+    }
+    if (searchInput) {
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          performSearch();
+        }
+      });
+    }
+
+    // 左侧频道高亮（根据滚动位置简单切换，可选）
+    var channelLinks = document.querySelectorAll('.channel-list a');
+    var sections = [];
+    channelLinks.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (href && href.startsWith('/#')) {
+        var id = href.substring(2);
+        var section = document.getElementById(id);
+        if (section) {
+          sections.push({ id: id, el: section, link: link });
+        }
+      }
+    });
+
+    if (sections.length > 0) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            channelLinks.forEach(function(l) { l.classList.remove('active'); });
+            var activeLink = document.querySelector('.channel-list a[href="/#' + id + '"]');
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+
+      sections.forEach(function(item) {
+        observer.observe(item.el);
+      });
+    }
+  })();
+</script>
+
+</body>
+          </html>
